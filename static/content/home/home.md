@@ -1,5 +1,5 @@
 ---
-title: Home
+title: Marco is the best
 images:
   - image: /static/uploads/smart.jpg
     title: Smart
