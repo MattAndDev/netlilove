@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import 'normalize.css'
-import React, { FC, useState } from 'react'
-import { graphql, StaticQuery } from 'gatsby'
+import React, { FC } from 'react'
+import { graphql } from 'gatsby'
 import { HomeQuery } from '../../graphql-types'
 import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import { slide } from './styles.module.css'
-// import cn from 'classnames'
 
 const Home: FC<{ data: HomeQuery }> = ({ data }) => {
   console.log(data)
@@ -22,8 +21,9 @@ const Home: FC<{ data: HomeQuery }> = ({ data }) => {
         transitionTime={200}
       >
         {data.allMarkdownRemark.edges[0].node.frontmatter.images.map(
-          ({ image }) => (
+          ({ image, title }) => (
             <div>
+              <h1 style={{ position: 'absolute' }}>{title}</h1>
               <img
                 className={slide}
                 src={image.childImageSharp.fluid.src}
@@ -49,6 +49,7 @@ export const pageQuery = graphql`
           fileAbsolutePath
           frontmatter {
             images {
+              title
               image {
                 childImageSharp {
                   fluid(maxWidth: 1800) {
